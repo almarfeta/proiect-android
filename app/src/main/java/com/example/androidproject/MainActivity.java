@@ -46,20 +46,25 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     }
 
     private void parseJSON() {
-        String url = "https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true";
+//        String url = "https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true";
+        String url = "https://api.imgflip.com/get_memes";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONArray jsonArray = response.getJSONArray("hits");
+//                    JSONArray jsonArray = response.getJSONArray("hits");
+                    JSONArray jsonArray = response.getJSONObject("data").getJSONArray("memes");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject hit = jsonArray.getJSONObject(i);
 
-                        String creatorName = hit.getString("user");
-                        String imageUrl = hit.getString("webformatURL");
-                        int likeCount = hit.getInt("likes");
+//                        String creatorName = hit.getString("user");
+//                        String imageUrl = hit.getString("webformatURL");
+//                        int likeCount = hit.getInt("likes");
+                        String creatorName = hit.getString("name");
+                        String imageUrl = hit.getString("url");
+                        int likeCount = 0;
 
                         mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount));
                     }
