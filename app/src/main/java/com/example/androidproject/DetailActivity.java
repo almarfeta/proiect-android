@@ -1,6 +1,6 @@
 package com.example.androidproject;
 
-import static com.example.androidproject.MainActivity.EXTRA_CREATOR;
+import static com.example.androidproject.MainActivity.EXTRA_NAME;
 import static com.example.androidproject.MainActivity.EXTRA_LIKES;
 import static com.example.androidproject.MainActivity.EXTRA_URL;
 
@@ -22,15 +22,15 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String imageUrl = intent.getStringExtra(EXTRA_URL);
-        String creatorName = intent.getStringExtra(EXTRA_CREATOR);
+        String name = intent.getStringExtra(EXTRA_NAME);
         int likeCount = intent.getIntExtra(EXTRA_LIKES, 0);
 
         ImageView imageView = findViewById(R.id.image_view_details);
-        TextView textViewCreator = findViewById(R.id.text_view_creator_detail);
+        TextView textViewName = findViewById(R.id.text_view_name_detail);
         TextView textViewLikes = findViewById(R.id.text_view_like_detail);
 
         Picasso.with(this).load(imageUrl).fit().centerInside().into(imageView);
-        textViewCreator.setText(creatorName);
-        textViewLikes.setText("Likes: " + likeCount);
+        textViewName.setText(name);
+        textViewLikes.setText("Up Votes: " + likeCount);
     }
 }

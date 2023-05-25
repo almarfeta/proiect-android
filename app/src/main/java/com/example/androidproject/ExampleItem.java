@@ -2,12 +2,12 @@ package com.example.androidproject;
 
 public class ExampleItem {
     private String mImageUrl;
-    private String mCreator;
+    private String mName;
     private int mLikes;
 
-    public ExampleItem(String mImageUrl, String mCreator, int mLikes) {
+    public ExampleItem(String mImageUrl, String mName, int mLikes) {
         this.mImageUrl = mImageUrl;
-        this.mCreator = mCreator;
+        this.mName = mName;
         this.mLikes = mLikes;
     }
 
@@ -15,8 +15,8 @@ public class ExampleItem {
         return mImageUrl;
     }
 
-    public String getmCreator() {
-        return mCreator;
+    public String getmName() {
+        return mName;
     }
 
     public int getmLikes() {

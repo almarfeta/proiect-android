@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ExampleAdapter.OnItemClickListener {
     public static final String EXTRA_URL = "imageUrl";
-    public static final String EXTRA_CREATOR = "creatorName";
+    public static final String EXTRA_NAME = "name";
     public static final String EXTRA_LIKES = "likeCount";
 
     private RecyclerView mRecyclerView;
@@ -46,27 +46,24 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     }
 
     private void parseJSON() {
-//        String url = "https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true";
-        String url = "https://api.imgflip.com/get_memes";
+        String url = "https://meme-api.com/gimme/50";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-//                    JSONArray jsonArray = response.getJSONArray("hits");
-                    JSONArray jsonArray = response.getJSONObject("data").getJSONArray("memes");
+                    JSONArray jsonArray = response.getJSONArray("memes");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject hit = jsonArray.getJSONObject(i);
+                        JSONObject meme = jsonArray.getJSONObject(i);
 
-//                        String creatorName = hit.getString("user");
-//                        String imageUrl = hit.getString("webformatURL");
-//                        int likeCount = hit.getInt("likes");
-                        String creatorName = hit.getString("name");
-                        String imageUrl = hit.getString("url");
-                        int likeCount = 0;
+                        if (!meme.getBoolean("nsfw")) {
+                            String imageUrl = meme.getString("url");
+                            String name = meme.getString("title");
+                            int likeCount = meme.getInt("ups");
 
-                        mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount));
+                            mExampleList.add(new ExampleItem(imageUrl, name, likeCount));
+                        }
                     }
 
                     mExampleAdapter = new ExampleAdapter(MainActivity.this, mExampleList);
@@ -92,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         ExampleItem clickedItem = mExampleList.get(position);
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getmImageUrl());
-        detailIntent.putExtra(EXTRA_CREATOR, clickedItem.getmCreator());
+        detailIntent.putExtra(EXTRA_NAME, clickedItem.getmName());
         detailIntent.putExtra(EXTRA_LIKES, clickedItem.getmLikes());
 
         startActivity(detailIntent);

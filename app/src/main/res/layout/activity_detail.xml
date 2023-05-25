@@ -14,10 +14,10 @@
         android:src="@mipmap/ic_launcher"
         />
 
-    <TextView android:id="@+id/text_view_creator_detail"
+    <TextView android:id="@+id/text_view_name_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Creator Name"
+        android:text="Title"
         android:textSize="40sp"
         android:textColor="@android:color/black"
         android:layout_marginStart="16dp"
@@ -27,7 +27,7 @@
     <TextView android:id="@+id/text_view_like_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Likes: "
+        android:text="Up Votes: "
         android:textSize="30sp"
         android:textColor="@android:color/darker_gray"
         android:layout_marginStart="16dp"
